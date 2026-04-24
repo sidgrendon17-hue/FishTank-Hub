@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { padding: 8px; margin: 10px 0; width: 200px; }
+        button { padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        #result { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>Tank Calculator</h1>
+    <label for="tankSize">Enter Tank Size (in liters):</label>
+    <input type="number" id="tankSize" placeholder="e.g., 50">
+    <button onclick="calculateTank()">Calculate</button>
+    <div id="result"></div>
+    <script>
+        function calculateTank() {
+            const tankSize = parseFloat(document.getElementById('tankSize').value);
+            if (isNaN(tankSize) || tankSize <= 0) {
+                document.getElementById('result').innerHTML = 'Please enter a valid tank size.';
+                return;
+            }
+            const fishCount = Math.floor(tankSize);
+            document.getElementById('result').innerHTML = `Your ${tankSize}L tank can hold approximately <strong>${fishCount}</strong> fish (using 1cm per liter rule).`;
+        }
+    </script>
+</body>
+</html>
