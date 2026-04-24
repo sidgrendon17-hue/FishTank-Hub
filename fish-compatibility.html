@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Compatibility Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fish Compatibility Checker</h1>
+    <label for="fish1">Select Fish 1:</label>
+    <select id="fish1">
+        <option value="goldfish">Goldfish</option>
+        <option value="betta">Betta</option>
+        <option value="neon_tetra">Neon Tetra</option>
+        <option value="guppy">Guppy</option>
+        <!-- Add more fish options here -->
+    </select>
+
+    <label for="fish2">Select Fish 2:</label>
+    <select id="fish2">
+        <option value="goldfish">Goldfish</option>
+        <option value="betta">Betta</option>
+        <option value="neon_tetra">Neon Tetra</option>
+        <option value="guppy">Guppy</option>
+        <!-- Add more fish options here -->
+    </select>
+
+    <button onclick="checkCompatibility()">Check Compatibility</button>
+
+    <div id="result"></div>
+
+    <script>
+        function checkCompatibility() {
+            const fish1 = document.getElementById('fish1').value;
+            const fish2 = document.getElementById('fish2').value;
+            let result = '';
+
+            if (fish1 === fish2) {
+                result = 'Same species! They will likely get along.';
+            } else if ((fish1 === 'betta' && fish2 === 'guppy') || (fish1 === 'guppy' && fish2 === 'betta')) {
+                result = 'Caution! Betta fish may attack Guppies.';
+            } else {
+                result = 'These fish are compatible!';
+            }
+
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
