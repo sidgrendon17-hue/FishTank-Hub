@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Selector</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        label { display: block; margin: 10px 0 5px 0; }
+        select { margin-bottom: 15px; padding: 8px; }
+        button { padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        #results { margin-top: 20px; }
+        .fish-card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Fish Selector</h1>
+    <label for="tankSize">Tank Size:</label>
+    <select id="tankSize">
+        <option value="small">Small (10-20L)</option>
+        <option value="medium">Medium (20-50L)</option>
+        <option value="large">Large (50L+)</option>
+    </select>
+    <label for="difficulty">Experience Level:</label>
+    <select id="difficulty">
+        <option value="easy">Easy (Beginner)</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard (Expert)</option>
+    </select>
+    <label for="temperament">Preferred Temperament:</label>
+    <select id="temperament">
+        <option value="peaceful">Peaceful</option>
+        <option value="semi-aggressive">Semi-Aggressive</option>
+        <option value="aggressive">Aggressive</option>
+    </select>
+    <button onclick="selectFish()">Get Recommendations</button>
+    <div id="results"></div>
+    <script>
+        const fishDatabase = {
+            easy: { peaceful: [{ name: 'Guppy', size: 'Small', temp: '24-28°C', lifespan: '2-3 years' }, { name: 'Neon Tetra', size: 'Small', temp: '22-26°C', lifespan: '5-10 years' }, { name: 'Corydoras Catfish', size: 'Small', temp: '22-28°C', lifespan: '3-4 years' }] },
+            medium: { peaceful: [{ name: 'Angelfish', size: 'Medium', temp: '24-28°C', lifespan: '10-12 years' }, { name: 'Pleco', size: 'Large', temp: '22-28°C', lifespan: '10+ years' }] }
+        };
+        function selectFish() {
+            const difficulty = document.getElementById('difficulty').value;
+            const temperament = document.getElementById('temperament').value;
+            let recommendations = fishDatabase[difficulty]?.[temperament] || [];
+            let html = '<h2>Recommended Fish:</h2>';
+            if (recommendations.length === 0) {
+                html += '<p>No recommendations found. Try different filters.</p>';
+            } else {
+                recommendations.forEach(fish => {
+                    html += `<div class="fish-card"><h3>${fish.name}</h3><p><strong>Size:</strong> ${fish.size}</p><p><strong>Temperature:</strong> ${fish.temp}</p><p><strong>Lifespan:</strong> ${fish.lifespan}</p></div>`;
+                });
+            }
+            document.getElementById('results').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
